@@ -28,6 +28,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="reparacion.php"> Reparaciones </a>
             </li>
+
+        
         </ul>
     </nav>
     <div class="container">
