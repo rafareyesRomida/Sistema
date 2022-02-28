@@ -75,6 +75,8 @@ switch ($accion) {
             $Unidad = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
 
 
+            
+
 
             if (isset($Unidad["img"]) && ($Unidad["img"] != "imagen.jpg")) {
 
