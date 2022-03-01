@@ -20,13 +20,16 @@
                 <a class="nav-link" href="unidades.php"> Unidades </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="refacciones.php"> Inventario </a>
+                <a class="nav-link" href="refaccionesid.php"> Inventario </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="servicios.php"> Servicios </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="reparacion.php"> Reparaciones </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="refacciones.php"> Catalogo de refacciones </a>
             </li>
 
         
