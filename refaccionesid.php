@@ -4,66 +4,81 @@
 
 $txtID = (isset($_POST['txtID'])) ? $_POST['txtID'] : "";
 $txtRefaccion = (isset($_POST['txtRefaccion'])) ? $_POST['txtRefaccion'] : "";
-$txtCodigo = (isset($_POST['txtCodigo'])) ? $_POST['txtCodigo'] : "";
+$txtcodigo = (isset($_POST['txtcodigo'])) ? $_POST['txtcodigo'] : "";
 $txtExistencia = (isset($_POST['txtExistencia'])) ? $_POST['txtExistencia'] : "";
-$txtId_Tractos = (isset($_POST['txtId_Tractos'])) ? $_POST['txtId_Tractos'] : "";
+$txteconomico = (isset($_POST['txteconomico'])) ? $_POST['txteconomico'] : "";
 $txtImg = (isset($_FILES['txtImg']['name'])) ? $_FILES['txtImg']['name'] : "";
 $accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
 ?>
 
 
 
-
       <?php
       include("administrador/config/bd.php");
-      $sentenciaSQL = $conexion->prepare("SELECT * FROM refacciones WHERE id_tractos=:Id_Tractos");
-      $sentenciaSQL->bindParam(':Id_Tractos', $txtId_Tractos);
+      $sentenciaSQL = $conexion->prepare("SELECT * FROM refacciones WHERE economico=:economico");
+      $sentenciaSQL->bindParam(':economico', $txteconomico);
       $sentenciaSQL->execute();
       $listaRefacciones =$sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
-      ?>
+
       
 
+
+      ?>
         <?php
        /* header("location:refaccionesid.php");
         break;
-        
 
 }*/?>
 
-
-
-
-
-
-<div class="col-md-4">
-    Agregar Refacciones
+<div class="col-md-6">
     <div class="card">
         <div class="card-header">
-            Descripcion de las refacciones
+            
         </div>
         <div class="card-body">
             <form method="POST" enctype="multipart/form-data">
 
-
-                
-
                 <div class="form-group">
-                    <label for="txtId_Tractos">Id_Tracto:</label>
-                    <input type="text" required class="form-control" value="1" name="txtId_Tractos" id="txtId_Tractos" placeholder="id_tractos">
+                    <label for="txteconomico">Numero economico de la unidad:</label>
+                    <input type="text" required class="form-control" value="0" name="txteconomico" id="txteconomico" placeholder="economico">
                 </div>
-                
 
-                
                 <div class="btn-group" role="group" aria-label="">
                     <button type="submit" name="accion"  value="Buscar" class="btn btn-info">Buscar</button>
                 </div>
+
             </form>
         </div>
 
     </div>
 
 </div>
-<div class="col-md-7">
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+           
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="txtcodigo">Codigo de refaccion:</label>
+                    <input type="text" required class="form-control" value="0" name="txtcodigo" id="txtcodigo" placeholder="codigo">
+                </div>
+                
+                <div class="btn-group" role="group" aria-label="">
+                    <button type="submit" name="accion"  value="Buscar" class="btn btn-info">Buscar</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="col-md-12">
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -71,7 +86,8 @@ $accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
                 <th>Refaccion</th>
                 <th>Codigo</th>
                 <th>Existencia</th>
-                <th>Id_Tractos</th>
+                <th>Economico</th>
+                <th>Equivalencias</th>
                 <th>Imagen</th>
             </tr>
         </thead>
@@ -85,7 +101,8 @@ $accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
                     <td><?php echo $Refaccion['refaccion']; ?></td>
                     <td><?php echo $Refaccion['codigo']; ?></td>
                     <td><?php echo $Refaccion['existencia']; ?></td>
-                    <td><?php echo $Refaccion['id_tractos']; ?></td>
+                    <td><?php echo $Refaccion['economico']; ?></td>
+                    <td><?php echo $Refaccion['Equivalencia']; ?></td>
                     <td>
                         <img class="img-thumbail rounded" src="img/<?php echo $Refaccion['img']; ?>" width="170" alt="" srcset="">
                     </td>
@@ -98,8 +115,5 @@ $accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
         </tbody>
     </table>
 </div>
-
-
-
 
 <?php include("template/pie.php"); ?>
