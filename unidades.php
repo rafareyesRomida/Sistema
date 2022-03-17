@@ -9,6 +9,8 @@
 
 include("administrador/config/bd.php");
 //$sentenciaSQL = $conexion->prepare("SELECT refacciones.id, refacciones.refaccion, refacciones.codigo, refacciones.existencia, refacciones.id_tractos, refacciones.img  FROM refacciones  WHERE id_tractos='$txtId_Tractos'");
+
+
 $sentenciaSQL = $conexion->prepare("SELECT * FROM tractos");
 $sentenciaSQL->execute();
 $listaUnidades = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
@@ -25,9 +27,8 @@ $listaUnidades = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
         <td> <?php echo $Unidad['Placas']; ?></td>
         <div class="form-group">
           <label for=""></label>
-          <input type="text" class="form-control" name="" id="" value="<?php echo $Unidad['id_tractos']; ?>" aria-describedby="helpId" placeholder="">
+          <input type="text" class="form-control" name="" id="" value="<?php echo $Unidad['economico']; ?>" aria-describedby="helpId" placeholder="">
         </div>
-        <h4> <a name="" id="" class="btn btn-info" href="refaccionesid.php" role="button">Ver refacciones</a></h4>
       </div>
     </div>
   </div>
