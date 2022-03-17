@@ -5,7 +5,7 @@ $txtID = (isset($_POST['txtID'])) ? $_POST['txtID'] : "";
 $txtRefaccion = (isset($_POST['txtRefaccion'])) ? $_POST['txtRefaccion'] : "";
 $txtCodigo = (isset($_POST['txtCodigo'])) ? $_POST['txtCodigo'] : "";
 $txtExistencia = (isset($_POST['txtExistencia'])) ? $_POST['txtExistencia'] : "";
-$txtId_Tractos = (isset($_POST['txtId_Tractos'])) ? $_POST['txtId_Tractos'] : "";
+$txteconomico = (isset($_POST['txteconomico'])) ? $_POST['txteconomico'] : "";
 $txtImg = (isset($_FILES['txtImg']['name'])) ? $_FILES['txtImg']['name'] : "";
 $accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
 
@@ -16,11 +16,11 @@ switch ($accion) {
     case "Agregar":
 
 
-        $sentenciaSQL = $conexion->prepare("INSERT INTO refacciones (refaccion, codigo, existencia, id_tractos, img) VALUES (:Refaccion, :Codigo, :Existencia, :Id_Tractos, :Img);");
+        $sentenciaSQL = $conexion->prepare("INSERT INTO refacciones (refaccion, codigo, existencia, economico, img) VALUES (:Refaccion, :Codigo, :Existencia, :ecnonomico, :Img);");
         $sentenciaSQL->bindParam(':Refaccion', $txtRefaccion);
         $sentenciaSQL->bindParam(':Codigo', $txtCodigo);
         $sentenciaSQL->bindParam(':Existencia', $txtExistencia);
-        $sentenciaSQL->bindParam(':Id_Tractos', $txtId_Tractos);
+        $sentenciaSQL->bindParam(':economico', $txteconomico);
 
         $fecha = new DateTime();
         $nombreArchivo = ($txtImg != "") ? $fecha->getTimestamp() . "_" . $_FILES["txtImg"]["name"] : "imagen.jpg";
@@ -53,8 +53,8 @@ switch ($accion) {
         $sentenciaSQL->bindParam(':ID', $txtID);
         $sentenciaSQL->execute();
 
-        $sentenciaSQL = $conexion->prepare("UPDATE refacciones SET id_tractos=:Id_Tractos WHERE id=:ID");
-        $sentenciaSQL->bindParam(':Id_Tractos', $txtId_Tractos);
+        $sentenciaSQL = $conexion->prepare("UPDATE refacciones SET economico=:economico WHERE id=:ID");
+        $sentenciaSQL->bindParam(':economico', $txteconomico);
         $sentenciaSQL->bindParam(':ID', $txtID);
         $sentenciaSQL->execute();
 
@@ -76,9 +76,9 @@ switch ($accion) {
 
             if (isset($Refaccion["img"]) && ($Refaccion["img"] != "imagen.jpg")) {
 
-                if (file_exists("../../img/" . $Refaccion["img"])) {
+                if (file_exists("../img/" . $Refaccion["img"])) {
 
-                    unlink("../../img/" . $Refaccion["img"]);
+                    unlink("../img/" . $Refaccion["img"]);
                 }
             }
 
@@ -103,7 +103,7 @@ switch ($accion) {
         $txtRefaccion = $Refaccion['refaccion'];
         $txtCodigo = $Refaccion['codigo'];
         $txtExistencia = $Refaccion['existencia'];
-        $txtId_Tractos = $Refaccion['id_tractos'];
+        $txtId_Tractos = $Refaccion['economico'];
         $txtImg = $Refaccion['img'];
 
 
@@ -173,8 +173,8 @@ $listaRefacciones = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                 </div>
 
                 <div class="form-group">
-                    <label for="txtId_Tractos">Id_Tracto:</label>
-                    <input type="text" required class="form-control" value="<?php echo $txtId_Tractos; ?>" name="txtId_Tractos" id="txtId_Tractos" placeholder="id_tractos">
+                    <label for="txteconomico">Economico:</label>
+                    <input type="text" required class="form-control" value="<?php echo $txteconomico; ?>" name="txteconomico" id="txteconomico" placeholder="economico">
                 </div>
 
                 <div class="form-group">
@@ -208,7 +208,7 @@ $listaRefacciones = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                 <th>Refaccion</th>
                 <th>Codigo</th>
                 <th>Existencia</th>
-                <th>Id_Tractos</th>
+                <th>economico</th>
                 <th>Imagen</th>
             </tr>
         </thead>
@@ -222,7 +222,7 @@ $listaRefacciones = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $Refaccion['refaccion']; ?></td>
                     <td><?php echo $Refaccion['codigo']; ?></td>
                     <td><?php echo $Refaccion['existencia']; ?></td>
-                    <td><?php echo $Refaccion['id_tractos']; ?></td>
+                    <td><?php echo $Refaccion['economico']; ?></td>
                     <td>
                         <img class="img-thumbail rounded" src="../../img/<?php echo $Refaccion['img']; ?>" width="170" alt="" srcset="">
                     </td>
